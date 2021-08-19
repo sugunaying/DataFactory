@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试开发干货</title>
+    <link rel="shortcut icon" href="/static/logo.ico">
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <style>
+    .mydiv{
+        background-color: #c5e0c8;
+        width:90%;
+        margin-left:5%;
+        margin-top:10px;
+        box-shadow:4px 4px 4px gray;
+        padding: 10px;
+    }
+    .mydiv li{
+        float:left;
+        width: 25%;
+        font-size: medium;
+        font-weight: bolder;
+        line-height: 25px;
+    }
+    .mydiv ul{
+        list-style-type: none;
+    }
+    .mydiv li a{
+        color: transparent;
+        text-decoration: none;{% comment %}去掉悬浮下划线{% endcomment %}
+        background: linear-gradient(to top,black,deeppink);
+        -webkit-background-clip: text;
+    }
+
+</style>
+</head>
+
+<body>
+{#{% extends 'menu.html' %}#}
+{% include 'menu.html' %}
+
+    <div class="input-group" style="width: 40%; margin-left: 30%;">
+        <input type="text" id="url_input" class="form-control" placeholder="请输入搜索关键字" style="width: 70%;border-color: #58c45d;text-align: center;">
+        <button onclick="search_btn()" class="search_btn" style="width: 10%;height:35px;">search</button>
+    </div>
+
+
+<div style="height: 450px;" class="mydiv">
+    <ul id="myul">
+        {% for i in hrefs %}
+            <li>
+                <a href="{{ i.url }}">{{ i.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div style="height:200px; "class="mydiv">
+    <h3>公告 <span class="glyphicon glyphicon-bullhorn"></span></h3>
+    {% for i in notices %}
+        <h5 style="color: darkblue;">{{ i.ncontent }}
+            <span style="font-size: small;color: dimgrey;">({{ i.stime }})</span>
+        </h5>
+    {% endfor %}
+</div>
+
+<script>
+    {#vue构造器#}
+    new Vue({
+        el:"#myul",//声明构造器管谁
+        delimiters:["[[","]]"],//处理vue冲突（对于归vue管的ul中，写"两个大括号"就不知道这个变量是从哪来，1，从后端带来，2，从data中传递过来；如果用两个中括号【【】】包裹变量就是从vue中的data中来）
+        data:{
+            v_hrefs:{{ hrefs|safe }}
+        }
+
+    })
+    function search_btn(){
+        //1. 拿到输入框的值
+        var search_cont=document.getElementById("url_input").value;
+        //2. 拿到所有url的name
+        var old_urls={{hrefs|safe}};
+        //3. 选择包含输入值的url
+        var new_urls=[];
+        for(var i=0; i<old_urls.length;i++){
+            if (old_urls[i]['name'].toLowerCase().indexOf(search_cont.toLowerCase()) !== -1 ){//# 因为indexOf找不到就是-1 #}
+            {#if (old_urls[i]['name'].indexOf(search_cont) !== -1 ){//# 因为indexOf找不到就是-1 ,精确搜索，不区分大小写#}
+                new_urls.push(old_urls[i]);
+            }
+        }
+        //4. 展示结果url//先清空ul的内容
+        var myul=document.getElementById("myul");
+        myul.innerHTML='';
+        for(var j=0;j<new_urls.length;j++){
+            var myli=document.createElement('li');
+            var mya=document.createElement('a');
+            mya.href=new_urls[j].url;
+            mya.innerText=new_urls[j].name;
+            {#console.log(new_urls[j]['name'])#}
+            myli.appendChild(mya);
+            myul.appendChild(myli);
+        }
+
+    }
+    //键盘enter实现搜索功能
+    $("#url_input").keypress(function(e){
+        if(e.keyCode===13) {
+            search_btn();
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
