@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 #路由与视图函数（views.py）
-from myapp.views import homepage, login_action, loginpage, logout,register
+from myapp.views import homepage, login_action, loginpage, logout, register, url_read
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', homepage),#进入主页
+    path('read/', url_read),#url浏览量
     path('accounts/login/', loginpage),#进入登录页面
     path('login_action/', login_action),#点击登录
     path('logout/', logout),#点击登录

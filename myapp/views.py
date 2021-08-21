@@ -14,9 +14,16 @@ def homepage(request):
     res["username"]=request.user.username
     # res["hrefs"]=DB_href.objects.all()#拿到所有QuerySet格式的数据，这个数据没办法再DOM层去用
     res["hrefs"]=list(DB_href.objects.all().values())
-    res["notices"]=DB_notice.objects.all()
+    res["notices"]=DB_notice.objects.all()[::-1]#从后端网前端传的时候就按照降序排序，通过列表翻转实现
     # return render(request, "home.html",{"username":request.user.username})
     return render(request, "home.html",res)
+
+def url_read(request):
+    id=request.GET["id"]
+    url=DB_href.objects.all().get(id=id)
+    url.count+=1
+    url.save(update_fields=['count'])
+    return HttpResponse("success")
 
 def loginpage(request):
     return render(request, "login.html", )

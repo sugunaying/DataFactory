@@ -5,6 +5,7 @@
     <title>测试开发干货</title>
     <link rel="shortcut icon" href="/static/logo.ico">
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <link rel="stylesheet" href="/static/fonts/font_2759798_guh4j1rx3co/iconfont.css">
     <style>
     .mydiv{
         background-color: #c5e0c8;
@@ -48,7 +49,7 @@
     <ul id="myul">
         {% for i in hrefs %}
             <li>
-                <a href="{{ i.url }}">{{ i.name }}</a>
+                <a target="_blank" onclick="url_readcount({{ i.id }})" href="{{ i.url }}">{{ i.name }}</a><span style="color: gray; float: right; margin-right:50px;"> <i class="iconfont icon-eye"></i>{{ i.count }}</span>
             </li>
         {% endfor %}
     </ul>
@@ -64,6 +65,11 @@
 </div>
 
 <script>
+    function url_readcount(id){
+        $.get('/read/',
+            {"id":id}
+        )
+    }
     {#vue构造器#}
     new Vue({
         el:"#myul",//声明构造器管谁
