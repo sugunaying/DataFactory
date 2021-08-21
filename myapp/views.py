@@ -25,6 +25,12 @@ def url_read(request):
     url.save(update_fields=['count'])
     return HttpResponse("success")
 
+def add_url(request):
+    url_content=request.GET["url"]
+    url_name=request.GET["url_name"]
+    DB_href.objects.create(url=url_content,name=url_name)
+    return HttpResponse("success")
+
 def loginpage(request):
     return render(request, "login.html", )
 
