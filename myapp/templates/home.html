@@ -6,8 +6,6 @@
     <link rel="shortcut icon" href="/static/logo.ico">
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
     <link rel="stylesheet" href="/static/fonts/font_2759798_guh4j1rx3co/iconfont.css">
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
     <style>
     .mydiv{
         background-color: #c5e0c8;
@@ -65,7 +63,7 @@
     <ul id="myul">
         {% for i in hrefs %}
             <li>
-                <a target="_blank" onclick="url_readcount({{ i.id }})" href="{{ i.url }}">{{ i.name }}</a><span style="color: gray; float: right; margin-right:50px;"> <i class="iconfont icon-eye"></i>{{ i.count }}</span>
+                <a title="SGY creat" target="_blank" onclick="url_readcount({{ i.id }})" href="{{ i.url }}">{{ i.name }}</a><span style="color: gray; float: right; margin-right:50px;"> <i class="iconfont icon-eye"></i>{{ i.count }}</span>
             </li>
         {% endfor %}
     </ul>
@@ -94,9 +92,8 @@
 <script>
     $(function (){
         $(".add_btn").click(function (){
-            {#console.log(document.getElementById("addurl").innerText)#}
-            document.getElementById("addurl").style.display='block';
-            {#$("#addurl").style.display='block';#}
+            {#document.getElementById("addurl").style.display='block';#}
+            $("#addurl").css("display","block");
         });
 
     });

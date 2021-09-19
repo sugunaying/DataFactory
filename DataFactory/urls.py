@@ -27,4 +27,7 @@ urlpatterns = [
     path('logout/', logout),#点击登录
     path('register/', register),#点击登录
     path('addurl/', add_url),#点击登录
+
+    #官方工具url
+    path('GM_tools/house/', house),#进入房源构造
 ]

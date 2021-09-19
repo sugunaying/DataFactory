@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>房源构造</title>
+</head>
+{% include "menu.html" %}
+<body>
+
+<div style="margin: 0 auto ; width: 300px; ">
+    地区：
+    <select name="" id="">
+        {% for i in address %}
+                <option value="">{{ i.name }}</option>
+        {% endfor %}
+    </select>
+    国家：
+    <select name="" id="">
+        {% for i in address %}
+                <option value="">{{ i.name }}</option>
+        {% endfor %}
+    </select>
+    <br>
+    <input type="text" id="username" placeholder="请输入用户名">
+    <br>
+    <input type="text" id="password" placeholder="请输入密码">
+    <br>
+
+    <input type="button" value="构造">
+</div>
+
+<script>
+    $(document).ready(function () {
+        //输入用户名密码就直接验证是否正确
+        {#alert("hello")#}
+
+
+    })
+</script>
+</body>
+</html>

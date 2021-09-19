@@ -6,7 +6,11 @@ from django.contrib.auth.decorators import login_required #登录验证
 from django.contrib.auth.models import User#拿到user表
 #request包含用户请求的一切信息都在里边，包括，用户名（固定写法request.user.username）、cookie....
 from myapp.models import DB_href, DB_notice
+from myapp.GM_init import *
 
+'''
+交互层：负责整理数据
+'''
 
 @login_required#强制在homepage页面引入登录态检查
 def homepage(request):
@@ -80,3 +84,27 @@ def register(request):
         return HttpResponse("注册失败，用户名已经存在")
 
 # python 操作数据库
+
+
+#构造房源
+def house(request):
+    #带入初始化的数据
+    res={}
+    res['address']=house_get_address()
+    return render(request,"GM_tools/house.html",res)
+
+#点击构造房源
+def house_run():
+    #把所有数据拿出来：清洗、判断、验证
+
+
+    #规范数据,不改前端改此处进行一个数据拦截，或者部分数据需要加密，
+
+    #获取所有步骤的id,用列表去接收，列表有顺序（不是获取所有步骤，根据用户的输入，来选择特定的步骤）
+
+
+    #调用业务层（数据已经清洗完毕，很干净）真实构造
+
+    #将业务层的返回结果给到浏览器
+
+    return
