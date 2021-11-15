@@ -69,8 +69,8 @@ def logout(request):
     return HttpResponseRedirect('/accounts/login/')
 
 def register(request):
-    Uname= request.POST.get('username',None)
-    Pwd=request.POST.get('password',None)
+    Uname= request.POST.get('username',None)#sgy
+    Pwd=request.POST.get('password',None)#123456a
     #注册
     try:
         user = User.objects.create_user(username=Uname,password=Pwd)
