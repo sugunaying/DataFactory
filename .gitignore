@@ -1,0 +1,14 @@
+#Python
+*.pyc
+
+#Eclipse
+.project
+.pydevproject
+.settings
+
+.secret
+
+target
+
+# PyCharm
+.idea
