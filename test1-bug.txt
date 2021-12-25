@@ -2,3 +2,5 @@ commit1
 bug
 bug finish
 bug2_new
+bug1_new
+
