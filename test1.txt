@@ -1,6 +1,0 @@
-test1 commit
-feature finish
-
-local
-origin_change
-over
